@@ -1,0 +1,338 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}Welcome | {% endblock %}
+
+<style>
+{% block style %}
+
+.navbar-static-top {
+ margin-bottom: 0px !important;
+}
+.jumbotron {
+ background-color: #0E3D14;
+ background-image:url(//d3dmykktyp55kz.cloudfront.net/fe/public/hero-2-7ca39f0c96.jpg);
+ color : ##413A54; 
+ /*background-repeat: no-repeat !important;
+ background-size: contain !important;*/
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.brand {height: 25px;}
+.users {
+  table-layout: fixed;
+  width: 100%;
+  white-space: nowrap;
+}
+.users td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+h1 {
+    font-size: 40px;
+    font-family:serif;
+
+}
+
+            table a:link {
+            color: #666;
+            font-weight: bold;
+            text-decoration:none;
+        }
+        table a:visited {
+            color: #999999;
+            font-weight:bold;
+            text-decoration:none;
+        }
+        table a:active,
+        table a:hover {
+            color: #bd5a35;
+            text-decoration:underline;
+        }
+        table {
+            /*font-family:Arial, Helvetica, sans-serif;
+            color:#666;*/
+            
+            font-size:14px;
+            font-color:#fff;
+            /*text-shadow: 1px 1px 0px #fff;*/
+            background:#eaebec;
+            margin:20px;
+            border:#ccc 1px solid;
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+            -moz-box-shadow: 0 1px 2px #d1d1d1;
+            -webkit-box-shadow: 0 1px 2px #d1d1d1;
+            box-shadow: 0 1px 2px #d1d1d1;
+        }
+        table th {
+            padding:21px 25px 22px 25px;
+            border-top:1px solid #fafafa;
+            border-bottom:1px solid #e0e0e0;
+            background: #555555;
+            text-align: center;
+            
+            background: -webkit-gradient(linear, left top, left bottom, from(#555455), to(#555555));
+            background: -moz-linear-gradient(top,  #555455,  #555555);
+        }
+        table th:first-child {
+            text-align: center;
+            padding-left:20px;
+            width: 500px;
+        }
+        table tr:first-child th:first-child {
+            -moz-border-radius-topleft:3px;
+            -webkit-border-top-left-radius:3px;
+            border-top-left-radius:3px;
+        }
+        table tr:first-child th:last-child {
+            -moz-border-radius-topright:3px;
+            -webkit-border-top-right-radius:3px;
+            border-top-right-radius:3px;
+        }
+        table tr {
+            text-align: center;
+            padding-left:20px;
+        }
+        table td:first-child {
+            text-align: left;
+            padding-left:20px;
+            border-left: 0;
+        }
+        table td {
+            padding:18px;
+            border-top: 1px solid #ffffff;
+            border-bottom:1px solid #e0e0e0;
+            border-left: 1px solid #e0e0e0;
+            background: #fafafa;
+            background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+            background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+        }
+        table tr.even td {
+            background: #f6f6f6;
+            background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+            background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+        }
+        table tr:last-child td {
+            border-bottom:0;
+        }
+        table tr:last-child td:first-child {
+            -moz-border-radius-bottomleft:3px;
+            -webkit-border-bottom-left-radius:3px;
+            border-bottom-left-radius:3px;
+        }
+        table tr:last-child td:last-child {
+            -moz-border-radius-bottomright:3px;
+            -webkit-border-bottom-right-radius:3px;
+            border-bottom-right-radius:3px;
+        }
+        table tr:hover td {
+            background: #f2f2f2;
+            background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+            background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+        }
+
+/*/* Column widths are based on these cells */
+/*.row-url {
+  width: 70%;
+}
+.row-da {
+  width: 25%;
+}
+.row-pa {
+  width: 25%;
+}
+.users td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.users th {
+  background: darkgreen;
+  color: white;
+}
+.users td,
+.users th {
+  text-align: left;
+  padding: 5px 10px;
+}
+.users tr:nth-child(even) {
+  background: lightgreen;
+
+
+}*/
+.form {
+  padding: 40px;
+  width: 600px;
+  height: 200px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.h1 {
+  font-size:14px;
+     height:50px;}
+}
+{% endblock %}
+</style>
+ {% block jumbotron %}
+ {% if request.user.is_authenticated %}
+ <div class = "jumbotron">
+    <div class ="container">
+      <div class ="row">
+        <div class ='col-sm-6'>
+          <h1 align="left">Website Analyser</h1>
+          <p align="left">
+          The complete analyzed, sophisticated <br/>
+          and user friendly way to check or analyze<br/> 
+          a website for a long run purchase.
+          </p>
+        </div>
+        <div class='col-sm-3'>
+          <p align="center"> Welcome {{ user }} </p>
+          <p align='center'>Click to see your history.</p>
+          <p align='center'>
+          <a class = "btn btn-lg btn-success" href = "{% url 'history' %}" role="button">View History &raquo;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+ </div>
+
+ {% else %}
+ <!-- <div class = "jumbotron">
+      <h1 align = "center">First you need to log in!!!</h1>
+      <div style="text-align: center">
+      <a class = "btn btn-lg btn-success" align="center" href = "http://127.0.0.1:8000/accounts/login/" role="button">Login</a>
+      </div>
+      </p>
+      </div>
+ -->
+<div class = "jumbotron">
+    <div class ="container">
+      <div class ="row">
+        <div class ='col-sm-6'>
+          <h1>Website Analyser</h1>
+          <p class = "lead" align="left">
+          The complete analyzed, sophisticated<br/>
+           and user friendly way to check or analyze<br/>
+            a website for a long run purchase. 
+          </p>
+        </div>
+        <div class = 'col-sm-3'>
+          <p align="center">Join us by clicking on the link below</p>
+          <p align="center">
+          <a class = "btn btn-lg btn-success" href = "http://127.0.0.1:8000/accounts/register/" role="button">Join Us &raquo;</a>
+          </p>
+          <p align="center">Already a member? <br>
+          Just enter your credentials in the login bar and Login</p>
+        </div>
+      </div>
+    </div>
+ </div>
+ {% endif %}
+ {% endblock %} 
+
+ {% block mycontent %}
+ <h2 align="center">The Entrepreneur’s Website Checker</h2>
+ <p align="center">Enter the url in the textbox below.</p>
+ <!-- <div class='form' align="center" > -->
+
+  <div class='col-md-6 col-md-offset-3 column' align="center" >
+ <form method='POST' action=''>{% csrf_token %}
+ {{ form|crispy }}
+ <input type='submit' value = 'SUBMIT' align = "center" class = 'btn btn-default' action= '' name='mybtn'>
+ <br>
+            
+            <!--  <input type ='text' align = "center" class='form-control' name='url' placeholder='Your URL' required pattern="https?://.+" /> --> 
+       
+             <!-- <button type='submit' align = "center"  class='btn btn-default'>SUBMIT</button> -->
+ </form>          
+ </div> 
+<br>
+<br>
+<br>
+ <form method='POST' action=''>{% csrf_token %}
+ <div class='col-md-3 col-md-offset-2 column' align = 'center'>
+ <!-- <input type='text' align="center" class='btn btn-default' placeholder = 'Monthly Revenue' id="revenue">
+ --> </div>
+ <div class='col-md-3 col-md-offset-2 column' align = 'center'>
+<!--  <input type='text' align="center" class='btn btn-default' placeholder = 'Price' id="Price"> -->
+ </div>
+ <div class='col-md-3 col-md-offset-4 column' align = 'center'>
+ <!-- <input type='submit' align="center" class='btn btn-default' value="Submit"> -->
+ </div>
+ </form>
+{%if main%}
+<h1>Website</h1>
+<br>
+ <table class="users">
+  <thead>
+<tr>
+<th class="row-1 row-url"><font color='#fff' >URL</font></th>
+<th class="row-da"><font color='#fff' >Domain Authority</font></th>
+<th class="row-pa"><font color='#fff' >Page Authority</font></th>
+</tr>
+</thead>
+{% for mains in main %}
+<tr>
+ <td><h5> <a href="{{details.apiurl}}">{{mains.myurl}}</h5></td>
+ 
+ <td><h5> {{mains.d_a}}</h5></td>
+ <td><h5> {{mains.p_a}}</h5></td>
+
+</tr>
+{% endfor %}
+</table>
+ {% endif %}
+ {% if detail %}
+ <!-- {% for details in detail %}
+ <h5>{{ details.apiurl }} : {{details.da}}</h5>
+
+{% endfor %} -->
+<h1>Backlinks</h1>
+<br>
+<table class="users">
+  <thead>
+<tr>
+<th class="row-1 row-url"><font color='#fff' >URL</font></th>
+<th class="row-da"><font color='#fff' >Domain Authority</font></th>
+<th class="row-pa"><font color='#fff' >Page Authority</font></th>
+</tr>
+</thead>
+{% for details in detail %}
+<tr>
+ <td><h5> <a href="{{details.apiurl}}">{{details.apiurl}}</h5></td>
+ 
+ <td><h5> {{details.da}}</h5></td>
+ <td><h5> {{details.pa}}</h5></td>
+
+</tr>
+{% endfor %}
+</table>
+<br>
+<br>
+
+ {% endif %}
+ 
+ {%if image %}
+ <h1>Verdict</h1>
+    {% if image == 1 %}
+    {% load staticfiles %}
+    <center><img src="{% static "img/perfect.jpg" %}" alt="My image" align="middle" /></center>
+    {%endif%}
+    {% if image == 2 %}
+    {% load staticfiles %}
+    <center><img src="{% static "img/Good.jpg" %}" alt="My image" align="middle" /></center>
+    {%endif%}
+    {% if image == 3 %}
+    {% load staticfiles %}
+    <center><img src="{% static "img/Bad.jpg" %}" alt="My image" align="middle" /></center>
+    {%endif%}
+      
+ {%endif%}
+ {% endblock %}
